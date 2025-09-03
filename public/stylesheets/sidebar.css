@@ -1,0 +1,51 @@
+/* Sidebar default (desktop) */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  background: #2c1810;
+  color: #fff;
+  transition: transform 0.3s ease;
+  z-index: 1050;
+  overflow-y: auto;
+}
+
+/* Sidebar profile */
+.sidebar-profile {
+  background: rgba(0,0,0,0.2);
+}
+
+/* Content area shifts when sidebar visible (desktop) */
+.content {
+  margin-left: 240px;
+  padding: 20px;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%); /* hidden by default */
+  }
+
+  .sidebar.active {
+    transform: translateX(0); /* show when toggled */
+  }
+
+  .content {
+    margin-left: 0; /* full width */
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #fff;
+  }
+}
+
+/* Hide toggle on desktop */
+.menu-toggle {
+  display: none;
+}

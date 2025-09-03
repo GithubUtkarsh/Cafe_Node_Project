@@ -1,0 +1,73 @@
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+</head>
+
+<div id="addRecipe" class="content-section">
+    <h2 class="section-title">Add New Recipe</h2>
+    <div class="form-card">
+        <form id="addRecipeForm" action=""  method="post" enctype="multipart/form-data" >
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="recipeName" class="form-label">Recipe Name</label>
+                    <input type="text" class="form-control" name="recipe_name" value="<%= addRecipe.recipe_name %>" id="recipeName" placeholder="e.g., Cappuccino" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="recipePrice" class="form-label">Price (₹)</label>
+                    <input type="number" class="form-control" name="recipe_price" value="<%= addRecipe.price %>" id="recipePrice" placeholder="299" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="recipeCategory" class="form-label">Category</label>
+                    <select class="form-control" id="recipeCategory" name="recipe_category" required>
+                        <option value="">Select Category</option>
+                        <option value="Coffee" <%= addRecipe.category === 'Coffee' ? 'selected' : '' %>>Coffee</option>
+                        <option value="Tea" <%= addRecipe.category === 'Tea' ? 'selected' : '' %>>Tea</option>
+                        <option value="Pastries" <%= addRecipe.category === 'Pastries' ? 'selected' : '' %>>Pastries</option>
+                        <option value="Sandwiches" <%= addRecipe.category === 'Sandwiches' ? 'selected' : '' %>>Sandwiches</option>
+                        <option value="Salads" <%= addRecipe.category === 'Salads' ? 'selected' : '' %>>Salads</option>
+                        <option value="Desserts" <%= addRecipe.category === 'Desserts' ? 'selected' : '' %>>Desserts</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="prepTime" class="form-label">Preparation Time (minutes)</label>
+                    <input type="number" class="form-control" value="<%= addRecipe.prep_time %>" name="prep_time" id="prepTime" placeholder="15" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="recipeDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="recipeDescription"  rows="3" name="description" placeholder="Describe your recipe..."
+                    required><%= addRecipe.description %></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="recipeImage" class="form-label">Recipe Image</label>
+                
+                <!-- Show current image if it exists -->
+                <% if (addRecipe.recipe_img) { %>
+                    <div class="current-image mb-2 p-3" style="background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">
+                        <p class="text-muted small mb-2">Current Image:</p>
+                        <img src="/<%= addRecipe.recipe_img %>" 
+                             alt="Current Recipe Image" 
+                             class="img-thumbnail" 
+                             style="max-width: 150px; max-height: 150px; object-fit: cover;">
+                    </div>
+                <% } %>
+                <!-- File input for new image (cannot have value attribute) -->
+                <input type="file" class="form-control" name="recipe_img" id="recipeImage" accept="image/*">
+                
+                <!-- Hidden field to store current image name -->
+                <input type="hidden" name="current_recipe_img" value="<%= addRecipe.recipe_img || '' %>">
+            </div>
+            <button type="submit" class="btn btn-custom">
+                Update Recipe
+            </button>
+            <!-- Add a cancel button -->
+            <a href="/dashboard/viewRecipe" class="btn btn-custom btn-secondary ms-2">
+                <i class="fas fa-times me-2"></i>Cancel
+            </a>
+        </form>
+    </div>
+</div>

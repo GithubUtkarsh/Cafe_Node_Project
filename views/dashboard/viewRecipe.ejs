@@ -1,0 +1,78 @@
+<div id="viewRecipes" class="content-section">
+    <h2 class="section-title">All Recipes</h2>
+    <div class="row" id="recipesContainer">
+        <!-- Sample Recipe Cards -->
+        <% if(addRecipe.length> 0) { %>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Recipe Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% addRecipe.forEach((recipe, index)=> { %>
+                            <tr>
+                                <td>
+                                    <%= index + 1 %>
+                                </td>
+                                <td>
+                                    <img src="/<%= recipe.recipe_img %>" alt="<%= recipe.recipe_name %>"
+                                        class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;">
+                                </td>
+                                <td>
+                                    <strong>
+                                        <%= recipe.recipe_name %>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <span class="text-muted">
+                                        <%= recipe.description %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge text-black fs-6">₹<%= recipe.price %></span>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+
+                                        <!-- Temporary debug info -->
+                                        <!-- <div style="font-size: 10px; color: red;">
+                                            ID: [<%= recipe.recipe_id %>]
+                                                Type: [<%= typeof recipe.recipe_id %>]
+                                        </div> -->
+
+                                        <a href="/edit/<%= recipe.recipe_id%>" class="btn btn-outline-primary btn-sm"
+                                            title="Edit Recipe">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <!-- <a href="/edit/<%= recipe.recipe_id %>" type="button" class="btn btn-outline-primary btn-sm"
+                                            title="Edit Recipe">
+                                            <i class="fas fa-edit"></i>
+                                        </a> -->
+                                        <!-- <button type="button" class="btn btn-outline-info btn-sm" title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </button> -->
+                                        <a href="/delete/<%= recipe.recipe_id%>" type="button" class="btn btn-outline-danger btn-sm"
+                                            title="Delete Recipe">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+            <% } else { %>
+                No Records Found
+                <% } %>
+    </div>
+
+</div>
+</div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See Result</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <%- include('./common/header.ejs') %>
+
+    <section class="menu">
+        <div class="results container" >
+            <% if (results.length===0) { %>
+                <p class="text-center text-white">No results found for "<%= searchTerm %>"</p>
+                <% } else { %>
+                    <h2 class="section-title text-white animate-on-scroll">
+                        See Results for : "<%= searchTerm %>"
+                    </h2>
+                    <div class="row g-4">
+                        <% results.forEach(item=> { %>
+                            <div class="col-4 animate-on-scroll">
+                                <div class="menu-card">
+                                    <img src="/<%= item.recipe_img %>" alt="<%= item.recipe_name %>" class="menu-img">
+                                    <h4>
+                                        <%= item.recipe_name %>
+                                    </h4>
+                                    <p>
+                                        <%= item.description %>
+                                    </p>
+                                    <div class="price">₹<%= item.price %>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                    <% } %>
+        </div>
+    </section>
+
+
+
+        <%- include('./common/footer.ejs') %>
+            <script src="/javascripts/script.js"></script>
+
+</body>
+
+</html>

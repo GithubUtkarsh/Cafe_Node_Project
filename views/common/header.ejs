@@ -1,0 +1,148 @@
+<head>
+    <style>
+        .search-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .search-form {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 8px;
+            width: 0;
+            overflow: hidden;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.95), rgba(210, 180, 140, 0.95));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(210, 180, 140, 0.4);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .search-form.active {
+            width: 280px;
+            opacity: 1;
+            padding: 8px 15px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            background: transparent;
+            color: rgba(255, 248, 220, 0.9);
+            font-size: 14px;
+            width: 100%;
+            padding: 5px 0;
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 248, 220, 0.6);
+        }
+
+        .search-btn {
+            background: rgba(139, 69, 19, 0.3);
+            border: 1px solid rgba(210, 180, 140, 0.4);
+            border-radius: 15px;
+            color: rgba(255, 248, 220, 0.9);
+            padding: 4px 10px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 248, 220, 0.6);
+            cursor: pointer;
+            padding: 2px;
+        }
+    </style>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <i class="fas fa-coffee me-2"></i>Brew & Bliss
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <!-- <a class="nav-link" href="#about">About</a> -->
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#menu">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+                <li class="nav-item search-item">
+                    <div class="nav-link search-icon" onclick="toggle()">
+                        <i class="fa-solid fa-magnifying-glass text-white fa-1x"></i>
+                    </div>
+                    <form class="search-form" id="form" method="get" action="/search">
+                        <input type="text" class="search-input" name="q" placeholder="Search..." id="input">
+                        <button type="submit" class="search-btn">Go</button>
+                        <button type="button" class="close-btn" onclick="closeSearch()">X</button>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login" onclick="openLoginPage()">
+                        <i class="fas fa-sign-in-alt me-1"></i>Login
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    let open = false;
+
+    function toggle() {
+        document.getElementById('form').classList.toggle('active');
+        open = !open;
+        if (open) setTimeout(() => document.getElementById('input').focus(), 300);
+    }
+   function closeSearch() {
+            const form = document.getElementById('form');
+            const input = document.getElementById('input');
+            
+            form.classList.remove('active');
+            input.value = '';
+            open = false;
+        }
+    function search(e) {
+        e.preventDefault();
+        alert('Searching: ' + document.getElementById('input').value);
+    }
+    document.addEventListener('click', e => {
+        if (!e.target.closest('.search-item') && open) close();
+    });
+        // Close when clicking outside
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.search-item') && open) {
+                closeSearch();
+            }
+        });
+        
+        // Close with Escape key
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && open) {
+                closeSearch();
+            }
+        });
+</script>

@@ -1,0 +1,47 @@
+<div id="addRecipe" class="content-section">
+    <h2 class="section-title">Add New Recipe</h2>
+    <div class="form-card">
+        <form id="addRecipeForm" action="/submit" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="recipeName" class="form-label">Recipe Name</label>
+                    <input type="text" class="form-control" name="recipe_name" id="recipeName" placeholder="e.g., Cappuccino" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="recipePrice" class="form-label">Price (₹)</label>
+                    <input type="number" class="form-control" name="recipe_price" id="recipePrice" placeholder="299" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="recipeCategory" class="form-label">Category</label>
+                    <select class="form-control" id="recipeCategory" name="recipe_category" required>
+                        <option value="">Select Category</option>
+                        <option value="Coffee">Coffee</option>
+                        <option value="Tea">Tea</option>
+                        <option value="Pastries">Pastries</option>
+                        <option value="Sandwiches">Sandwiches</option>
+                        <option value="Salads">Salads</option>
+                        <option value="Desserts">Desserts</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="prepTime" class="form-label">Preparation Time (minutes)</label>
+                    <input type="number" class="form-control" name="prep_time" id="prepTime" placeholder="15" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="recipeDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="recipeDescription" rows="3" name="description" placeholder="Describe your recipe..."
+                    required></textarea>
+            </div>
+            <div class="mb-4">
+                <label for="recipeImage" class="form-label">Recipe Image</label>
+                <input type="file" class="form-control" name="recipe_img" id="recipeImage" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-custom">
+                <i class="fas fa-plus me-2"></i>Add Recipe
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe Mania</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+
+<body>
+    <%- include('./common/header.ejs') %>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Brew & Bliss Cafe</h1>
+                    <p class="lead">Where every cup tells a story and every moment is a celebration</p>
+                    <a href="#menu" class="btn btn-custom text-white">Explore Our Menu</a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Menu Section -->
+        <section id="menu" class="menu">
+            <% if (addRecipe.length> 0) { %>
+                <div class="container">
+                    <h2 class="section-title text-white animate-on-scroll">Our Signature Menu</h2>
+                    <div class="row g-4 ">
+                        <% for (var i=0 ; i <addRecipe.length ; i++) { %>
+                            <div class="col  col-md-4 animate-on-scroll">
+                                <div class="menu-card">
+                                    <img src="<%= addRecipe[i].recipe_img %>"
+                                        alt="Artisan Coffee" class="menu-img">
+                                    <h4>
+                                        <%= addRecipe[i].recipe_name %>
+                                    </h4>
+                                    <p>
+                                        <%= addRecipe[i].description %>
+                                    </p>
+                                    <div class="price">₹<%= addRecipe[i].price %>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <% } %>
+                    </div>
+                </div>
+                <% } else { %>
+                    <p>No Recipe found</p>
+                    <% } %>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Visit Us Today</h2>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-4 col-md-6 animate-on-scroll">
+                        <div class="contact-info text-center">
+                            <i class="fas fa-map-marker-alt contact-icon"></i>
+                            <h4>Location</h4>
+                            <p>42, Khan Market<br>New Delhi, Delhi 110003<br>Near Khan Market Metro Station</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 animate-on-scroll">
+                        <div class="contact-info text-center">
+                            <i class="fas fa-clock contact-icon"></i>
+                            <h4>Hours</h4>
+                            <p>Monday - Friday: 6:00 AM - 9:00 PM<br>Saturday - Sunday: 7:00 AM - 10:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 animate-on-scroll">
+                        <div class="contact-info text-center">
+                            <i class="fas fa-phone contact-icon"></i>
+                            <h4>Contact</h4>
+                            <p>Phone: +91 98765 43210<br>Email: info@brewbliss.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <%- include('./common/footer.ejs') %>
+        <script src="/javascripts/script.js"></script>
+</body>
+
+</html>

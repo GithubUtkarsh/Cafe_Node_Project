@@ -1,0 +1,19 @@
+ <div id="viewContacts" class="content-section">
+                <h2 class="section-title">Customer Messages</h2>
+                <div id="contactsContainer">
+                    <!-- Sample Contact Messages -->
+                     <% viewContact.forEach((contact)=>{ %>
+                    <div class="contact-message">
+                        <div class="message-header">
+                            <div class="message-from"><%= contact.first_name %> <%= contact.last_name %></div>
+                            <div class="message-date"><%= contact.created_at %></div>
+                        </div>
+                        <div class="message-subject">Subject : <%= contact.subject %></div>
+                        <p><%= contact.message %></p>
+                        <small class="text-muted">Email: <%= contact.email %> | Phone: +91 <%= contact.phone %></small>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>

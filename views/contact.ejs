@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/contact.css">
+</head>
+<body>
+
+    <%- include('./common/header.ejs') %>
+
+    <!-- Contact Info Section -->
+    <section class="contact-section mt-5">
+        <div class="container">
+            <h1 class="animate-on-scroll section-title">Contact Us</h1>
+            <p class="section-subtitle animate-on-scroll">Visit us, call us, or send us a message. We're here to serve you the perfect cup!</p>    
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="form-container">
+                        <h2 class="section-title text-white mb-4">Send Us A Message</h2>
+                        <form id="contactForm" action="/contact" method="post">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" name="fname" id="firstName" placeholder="Your First Name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" name="lname" id="lastName" placeholder="Your Last Name" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="your@email.com" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" name="phone_no" id="phone" placeholder="+91 98765 43210">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <select class="form-control" name="subjects" id="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="reservation">Table Reservation</option>
+                                    <option value="catering">Catering Services</option>
+                                    <option value="events">Private Events</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="complaint">Complaint</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" name="message" id="message" rows="5" placeholder="Tell us how we can help you..." required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-send">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Find Us</h2>
+            <p class="section-subtitle animate-on-scroll">Located in the heart of Delhi's Khan Market</p>
+            
+            <div class="map-container animate-on-scroll">
+                <!-- Replace this div with actual Google Maps embed -->
+                <div class="map-placeholder">
+                    <div class="text-center">
+                        <i class="fas fa-map-marked-alt fa-3x mb-3"></i>
+                        <p>Interactive Google Maps will be embedded here<br>
+                           <small>Khan Market, New Delhi, Delhi 110003</small></p>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section class="hours-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title animate-on-scroll">Opening Hours</h2>
+                    <div class="hours-card animate-on-scroll">
+                        <div class="day-hours">
+                            <span class="day">Monday</span>
+                            <span class="hours">6:00 AM - 9:00 PM</span>
+                        </div>
+                        <div class="day-hours">
+                            <span class="day">Tuesday</span>
+                            <span class="hours">6:00 AM - 9:00 PM</span>
+                        </div>
+                        <div class="day-hours">
+                            <span class="day">Wednesday</span>
+                            <span class="hours">6:00 AM - 9:00 PM</span>
+                        </div>
+                        <div class="day-hours">
+                            <span class="day">Thursday</span>
+                            <span class="hours">6:00 AM - 9:00 PM</span>
+                        </div>
+                        <div class="day-hours">
+                            <span class="day">Friday</span>
+                            <span class="hours">6:00 AM - 9:00 PM</span>
+                        </div>
+                        <div class="day-hours">
+                            <span class="day">Saturday</span>
+                            <span class="hours">7:00 AM - 10:00 PM</span>
+                        </div>
+                        <div class="day-hours">
+                            <span class="day">Sunday</span>
+                            <span class="hours">7:00 AM - 10:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <%- include('./common/footer.ejs') %>
+    <script src="/javascripts/contact.js"></script>
+</body>
+</html>
