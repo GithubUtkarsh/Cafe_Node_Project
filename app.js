@@ -8,8 +8,10 @@ const facebookStrategy = require('passport-facebook').Strategy;
 const config = require("./config/config")
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
-const dotenv = require('dotenv');
-dotenv.config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
