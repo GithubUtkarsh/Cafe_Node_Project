@@ -2,27 +2,27 @@ const mysql = require('mysql2/promise');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const mySqlHost = process.env.mySqlHost || "localhost";
-const mySqlUser = process.env.mySqlUser || "root";
-const mySqlPassword= process.env.mySqlPassword;
-const mySqlDatabase= process.env.mySqlDatabase;
-const mySqlPort = process.env.mySqlPort || 3000;
+const MYSQLHOST = process.env.MYSQLHOST || "localhost";
+const MYSQLUSER = process.env.MYSQLUSER || "root";
+const MYSQLPASSWORD = process.env.MYSQLPASSWORD;
+const MYSQLDATABASE = process.env.MYSQLDATABASE;
+const MYSQLPORT = process.env.MYSQLPORT || 3306;
 
 
-if(!mySqlPassword || !mySqlDatabase) {
+if (!MYSQLPASSWORD || !MYSQLDATABASE) {
     console.error('SQL Password or Database is not defined');
     process.exit(1);
 }
 
 const con = mysql.createPool({
-    host:'localhost',
-    user:'root',
-    password: mySqlPassword,
-    database: mySqlDatabase,
-    port:mySqlPort,
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT,
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0 
+    queueLimit: 0
 });
 // con.connect(function(err){
 //     if(err) throw err;
@@ -87,4 +87,4 @@ const con = mysql.createPool({
 //             });
 // });
 
-module.exports=con;
+module.exports = con;
