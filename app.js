@@ -4,13 +4,17 @@ const bodyParser = require('body-parser');
 const router = require('./controller/router');
 const passport = require('passport');
 const googleStrategy = require('passport-google-oauth20').Strategy;
-const facebookStrategy = require('passport-facebook').Strategy;
+// const facebookStrategy = require('passport-facebook').Strategy;
 const config = require("./config/config")
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
+const MySQLStore = require('express-mysql2-session')(session);
+const con = require('./database/mysqlconfig');
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+    require("dotenv").config();
 }
+
+const sessionStore = new MySQLStore({},con)
 
 
 app.set('view engine', 'ejs');
@@ -25,6 +29,7 @@ app.use(
         key: "user_sid",
         secret: "somerandomstuffs",
         resave: false,
+        store: sessionStore,
         saveUninitialized: false,
         cookie: {
             expires: 1000 * 60 * 60 * 24,
@@ -42,8 +47,8 @@ passport.use(
         callbackURL: process.env.GOOGLE_CALLBACK_URL || 'http://localhost:3000/auth/google/callback'
     },
         (accessToken, refreshToken, profile, done) => {
-        return done(null, profile);
-    }
+            return done(null, profile);
+        }
     )
 );
 // passport.use(
@@ -58,19 +63,19 @@ passport.use(
 
 // )
 // )
-passport.serializeUser((user,done)=>done(null,user));
-passport.deserializeUser((user,done)=>done(null,user));
+passport.serializeUser((user, done) => done(null, user));
+passport.deserializeUser((user, done) => done(null, user));
 
 console.log("ENV CHECK:", {
-  mysqlHost: process.env.mySqlHost,
-  mysqlUser: process.env.mySqlUser,
-  mysqlPass: process.env.mySqlPassword,
-  mysqlDb: process.env.mySqlDatabase,
-  googleId: process.env.GOOGLE_CLIENT_ID
+    mysqlHost: process.env.mySqlHost,
+    mysqlUser: process.env.mySqlUser,
+    mysqlPass: process.env.mySqlPassword,
+    mysqlDb: process.env.mySqlDatabase,
+    googleId: process.env.GOOGLE_CLIENT_ID
 });
 
 
 
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT || 3000;
 app.use('/', router);
 app.listen(PORT, console.log(`App is running on port ${PORT}`));
