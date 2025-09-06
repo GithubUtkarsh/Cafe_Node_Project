@@ -39,29 +39,38 @@ passport.use(
     new googleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://localhost:3000/auth/google/callback'
+        callbackURL: process.env.GOOGLE_CALLBACK_URL || 'http://localhost:3000/auth/google/callback'
     },
         (accessToken, refreshToken, profile, done) => {
         return done(null, profile);
     }
     )
 );
-passport.use(
-    new facebookStrategy({
-        clientID:config.facebookAuth.clientID,
-        clientSecret:config.facebookAuth.clientSecret,
-        callbackURL:config.facebookAuth.callbackURL
-    },
-    (accessToken,refreshToken,process,done)=>{
-        return done(null,profile);
-    }
+// passport.use(
+//     new facebookStrategy({
+//         clientID:config.facebookAuth.clientID,
+//         clientSecret:config.facebookAuth.clientSecret,
+//         callbackURL:config.facebookAuth.callbackURL
+//     },
+//     (accessToken,refreshToken,process,done)=>{
+//         return done(null,profile);
+//     }
 
-)
-)
+// )
+// )
 passport.serializeUser((user,done)=>done(null,user));
 passport.deserializeUser((user,done)=>done(null,user));
 
+console.log("ENV CHECK:", {
+  mysqlHost: process.env.mySqlHost,
+  mysqlUser: process.env.mySqlUser,
+  mysqlPass: process.env.mySqlPassword,
+  mysqlDb: process.env.mySqlDatabase,
+  googleId: process.env.GOOGLE_CLIENT_ID
+});
 
-const PORT = 3000 || 5000 || 1200;
+
+
+const PORT = process.env.PORT || 3000 ;
 app.use('/', router);
 app.listen(PORT, console.log(`App is running on port ${PORT}`));

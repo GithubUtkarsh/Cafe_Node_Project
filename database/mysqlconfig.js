@@ -2,8 +2,12 @@ const mysql = require('mysql2');
 const dotenv = require('dotenv');
 dotenv.config();
 
+const mySqlHost = process.env.mySqlHost || "localhost";
+const mySqlUser = process.env.mySqlUser || "root";
 const mySqlPassword= process.env.mySqlPassword;
 const mySqlDatabase= process.env.mySqlDatabase;
+const mySqlPort = process.env.mySqlPort || 3000;
+
 
 if(!mySqlPassword || !mySqlDatabase) {
     console.error('SQL Password or Database is not defined');
@@ -15,6 +19,7 @@ const con = mysql.createConnection({
     user:'root',
     password: mySqlPassword,
     database: mySqlDatabase,
+    port:mySqlPort,
 });
 // con.connect(function(err){
 //     if(err) throw err;
