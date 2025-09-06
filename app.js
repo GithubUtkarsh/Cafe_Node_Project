@@ -66,14 +66,6 @@ passport.use(
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
-console.log("ENV CHECK:", {
-    mysqlHost: process.env.mySqlHost,
-    mysqlUser: process.env.mySqlUser,
-    mysqlPass: process.env.mySqlPassword,
-    mysqlDb: process.env.mySqlDatabase,
-    googleId: process.env.GOOGLE_CLIENT_ID
-});
-
 
 
 const PORT = process.env.PORT || 3000;
